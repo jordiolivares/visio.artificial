@@ -1,0 +1,22 @@
+function [ output_args ] = ej18( input_args )
+%EJ18 Summary of this function goes here
+%   Detailed explanation goes here
+    coat = imread('coat.png');
+    model = imread('model.png');
+    coat_gray = rgb2gray(coat);
+    coat_fg = (coat_gray ~= 0);
+    coat_bg = ~coat_fg;
+
+    R = model(:, :, 1);
+    G = model(:, :, 2);
+    B = model(:, :, 3);
+    R(coat_fg) = coat(:,:,1)(:)
+    G(coat_fg) = 0;
+    B(coat_fg) = 0;
+    model(:, :, 1) = R;
+    model(:, :, 2) = G;
+    model(:, :, 3) = B;
+
+    imshow(model)
+end
+
