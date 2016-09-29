@@ -9,7 +9,7 @@ function [  ] = ej11( )
     % x,y,canales = 255 255 3
     % Convert it into grayscale
     lena_scale = rgb2gray(lena);
-    % calculate the 10% of the size and round it to an int
+    % calculate the 10% of the size and round it to the nearest int
     borderX = uint8(x * 0.1);
     borderY = uint8(y * 0.1);
     % Left and right borders
