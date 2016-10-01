@@ -16,7 +16,7 @@ function [  ] = ej12( )
     % low brightness now
     min_bright = min(car(:));
     car_low = car - min_bright;
-    imwrite(car_low, 'car_low.jpg');
+    imwrite(car_low, 'car_dark.jpg');
     figure
     subplot(2,1,1)
     imhist(car)
