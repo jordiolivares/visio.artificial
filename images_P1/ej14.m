@@ -16,6 +16,8 @@ function [ output_args ] = ej14( input_args )
     imshow(im2)
     subplot(1, 3, 3)
     imshow(im3)
+    print('subplot_4_binary.png', '-dpng');
+    close
     % Now we merge the images
     background = ones(777, 934,'uint8') .* 255;
     ans1 = (background - (uint8(im1) .* 255)) + (uint8(im1) .* 0);
@@ -28,5 +30,7 @@ function [ output_args ] = ej14( input_args )
     imshow(ans2)
     subplot(1, 3, 3)
     imshow(ans3)
+    print('subplot_4_circles.png', '-dpng');
+    close
 end
 

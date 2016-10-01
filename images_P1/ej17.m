@@ -2,6 +2,7 @@ function [ output_args ] = ej17( input_args )
 %EJ17 Summary of this function goes here
 %   Detailed explanation goes here
     logo = imread('logo.png');
+    % We search and obtain the places were the colour is found
     R = (logo(:,:,1) == 6);
     G = (logo(:,:,2) == 118);
     B = (logo(:,:,3) == 85);

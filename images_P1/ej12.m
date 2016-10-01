@@ -11,7 +11,8 @@ function [  ] = ej12( )
     imhist(car)
     subplot(2,1,2)
     imhist(car_bright)
-    pause
+    print('subplot_2_high.png', '-dpng');
+    close
     % low brightness now
     min_bright = min(car(:));
     car_low = car - min_bright;
@@ -21,6 +22,8 @@ function [  ] = ej12( )
     imhist(car)
     subplot(2,1,2)
     imhist(car_low)
+    print('subplot_2_low.png', '-dpng');
+    close
     
     % high contrast
     % we scale the gray colours to a 0 to 1 scale
@@ -32,5 +35,8 @@ function [  ] = ej12( )
     imhist(car)
     subplot(2,1,2)
     imhist(car_contrast)
+    imwrite(car_contrast, 'car_contrast.jpg');
+    print('subplot_2_contrast.png', '-dpng');
+    close
 end
 
