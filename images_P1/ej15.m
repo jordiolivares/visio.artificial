@@ -5,7 +5,7 @@ function [ output_args ] = ej15( file )
     imR = img(:,:,1);
     imG = img(:,:,2);
     imB = img(:,:,3);
-    
+
     figure
     subplot(2,3,2)
     imshow(img);
@@ -17,13 +17,13 @@ function [ output_args ] = ej15( file )
     imshow(imB);
     print('subplot_5.png', '-dpng');
     close
-    
+    % Switch channels
     img(:,:,2) = imR;
     img(:,:,1) = imG;
     imshow(img)
     imwrite(img, 'ej15_cambiados.png');
+    % Set a channel to zero
     img(:,:,1) = imR;
     img(:,:,2) = 0;
     imwrite(img, 'ej15_zero.png');
 end
-

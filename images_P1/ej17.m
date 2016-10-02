@@ -6,9 +6,9 @@ function [ output_args ] = ej17( input_args )
     R = (logo(:,:,1) == 6);
     G = (logo(:,:,2) == 118);
     B = (logo(:,:,3) == 85);
-    
+
     RGB = uint8(R & G & B);
-    
+    % Now we replace the pixels in that location with our colour
     logo(:,:,1) = (logo(:,:,1) - (logo(:,:,1) .* RGB)) + RGB .* 255;
     logo(:,:,2) = (logo(:,:,2) - (logo(:,:,2) .* RGB)) + RGB .* 0;
     logo(:,:,3) = (logo(:,:,3) - (logo(:,:,3) .* RGB)) + RGB .* 0;

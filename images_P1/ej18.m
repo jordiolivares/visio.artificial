@@ -8,12 +8,12 @@ function [ output_args ] = ej18( input_args )
     coat_gray = rgb2gray(coat);
     coat_fg = (coat_gray ~= 0); % Get all the elements different than 0
     mega_coat = repmat(coat_fg, 1, 1, 3);
-    
+
     % Invert the foreground matrix to obtain the background
     coat_bg = ~coat_fg;
-
+    % We take advantage of the fact coat and model have the same size
+    % and the pixels in the same position
     model(mega_coat) = coat(mega_coat);
 
     imwrite(model, 'model_coat.jpg');
 end
-
