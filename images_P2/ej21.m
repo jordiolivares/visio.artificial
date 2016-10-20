@@ -9,7 +9,7 @@ function [] = ej21()
     mask_hor = mask_hor / sum(mask_hor);
     
     smoothedGray1D_hor = imfilter(imGray, mask_hor);
-    for i = 1:300
+    for i = 1:30
         smoothedGray1D_hor = imfilter(smoothedGray1D_hor, mask_hor);
     end
     
@@ -28,10 +28,35 @@ function [] = ej21()
     subplot(3,4,10),imhist(resizedIm),title('Histogram of resized im.'),...
     subplot(3,4,11),imhist(uint8(smoothedGray1D_hor)),title ('Histogram of smoothed image');
     
-    inverseGaussian = 1 ./ fspecial('gaussian', 1);
     figure
-    imshow(imfilter(imGray, inverseGaussian));
+    subplot(2,1,1)
+    imshow(smoothedGray1D_hor)
+    subplot(2,1,2)
+    imshow(smoothedGray1D_ver)
     
+    our_mask = ones(10);
+    our_mask = our_mask ./ sum(sum(our_mask));
+    
+    figure
+    imshow(imfilter(imGray, our_mask))
+    
+    mask_a = [1 1 1 1 1; 1 1 1 1 1];
+    mask_b = ones(5);
+    
+    figure
+    subplot(1,2,1)
+    imshow(imfilter(imGray, mask_a))
+    subplot(1,2,2)
+    imshow(imfilter(imGray, mask_b))
+    
+    mask_a = mask_a ./ sum(sum(mask_a));
+    mask_b = mask_b ./ sum(sum(mask_b));
+    
+    figure
+    subplot(1,2,1)
+    imshow(imfilter(imGray, mask_a))
+    subplot(1,2,2)
+    imshow(imfilter(imGray, mask_b))
     
 end
 
