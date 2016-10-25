@@ -32,7 +32,7 @@ tamaño de la imagen original? ¿Se pierden los detalles de la imagen re-escalad
  \includegraphics[width=0.8\textwidth]{1a.png}
  \end{center}
 
- \item \textit{Repetirla suavización varias veces para eliminar la línea del medio. ¿Cuántas iteraciones hace falta para eliminar la línea?}
+ \item \textit{Repetir la suavización varias veces para eliminar la línea del medio. ¿Cuántas iteraciones hace falta para eliminar la línea?}
 
  30 iteraciones son suficientes.
 
@@ -108,7 +108,7 @@ sobre la imagen con el fin de observar el efecto de suavizado mejor. }
 no lineales}
 
  \begin{enumerate}
- \item \textit{  Generar  el  kernel  (núcleo)  de  la  Gaussiana  con  el  comando  de  Matlab  y  aplicar  la 
+ \item \textit{Generar  el  kernel  (núcleo)  de  la  Gaussiana  con  el  comando  de  Matlab  y  aplicar  la 
 convolución  sobre alguna  de las imágenes seleccionadas para el Ejercicio  2.1.  Repetir 
 100 veces la suavización para ver mejor el efecto. Comparar con la suavización con filtro 
 de  la  media. Utilizar  diferentes  valores  de  sigma  y  comentar  su  efecto.  ¿Qué  valor  de 
@@ -164,22 +164,94 @@ píxel puede quedar en negativo).}
  \item \textit{Leer  la  imagen  ‘logo.png’ y  encontrar  sus  contornos (¿Cuál  es  el  comando  en 
 Matlab?)}
 
- Las partes no blancas, a medida que subimos el umbral, más partes quedan absorbidas directamente al color negro. Lo mismo al revés.
+ El comando es imcontour
 
  \item \textit{Aplicar  los  diferentes  operadores  de  contornos  vistos  en  clase  de  teoría  y 
-encontrar los parámetros óptimos para cada uno de ellos. Utiliza subplot y title
-para visualizar los diferentes resultados.
-¿Cuál es el mejor detector de bordes? ¿Cuáles son los parámetros óptimos para 
-esta  imagen? ¿Hace  falta  normalizar  la  máscara  como  en  el  filtraje  para  la 
-suavización?}
+encontrar los parámetros óptimos para cada uno de ellos. Utiliza subplot y title para visualizar los diferentes resultados. ¿Cuál es el mejor detector de bordes? ¿Cuáles son los parámetros óptimos para esta  imagen? ¿Hace  falta  normalizar  la  máscara  como en el filtraje para la suavización?}
 
+ Los operadores aplicados son:
+ 
+ - Sobel : threshold = 0.2
+ 
+ \begin{center}
+ \includegraphics[width=0.6\textwidth]{3a(sobel).png}
+ \end{center}
+ 
+ - Prewitt : threshold = 0.2
+ 
+ \begin{center}
+ \includegraphics[width=0.6\textwidth]{3a(prewitt).png}
+ \end{center} 
+ 
+ \newpage
+ - Canny : threshold = 0.1
+ 
+ \begin{center}
+ \includegraphics[width=0.6\textwidth]{3a(canny).png}
+ \end{center} 
+ 
+ - Laplaciano : threshold = 0.01
+
+ \begin{center}
+ \includegraphics[width=0.6\textwidth]{3a(laplace).png}
+ \end{center} 
+
+ \newpage
  \item \textit{Repite  el  experimento  con  otras  imágenes  de  las  incluidas  en  “images.zip”. 
 Comenta si los parámetros se deberían cambiar para cada imagen. }
- \begin{enumerate}
-  \item ¿Se mejoran los contornos si la imagen se suaviza antes?
+
+  Cogimos la imagen coral porque es una imagen con muchos detalles y queríamos ver como se comportan los filtros en 2 casos extremos (imagen poco detallada - imagen muy detallada).
+
+  Repetimos el experimento con los mismos threshold, excepto el de Canny, lo cambiamos a 0.15. Vimos que con estos parámetros en los filtros Sobel y Prewitt se pierde mucha información, con lo cual los parámetros deberían modificarse para adaptarlos a esta imagen.
+
+   - Sobel : threshold = 0.2
+ 
+ \begin{center}
+ \includegraphics[width=0.6\textwidth]{3b(sobel).png}
+ \end{center}
+ 
+ - Sobel MEJORADO : threshold = 0.05
+ 
+ \begin{center}
+ \includegraphics[width=0.6\textwidth]{3b(sobel_best).png}
+ \end{center}
+ 
+ \newpage
+ 
+ - Prewitt : threshold = 0.2
+ 
+ \begin{center}
+ \includegraphics[width=0.6\textwidth]{3b(prewitt).png}
+ \end{center} 
+ 
+ - Prewitt MEJORADO : threshold = 0.05
+ 
+ \begin{center}
+ \includegraphics[width=0.6\textwidth]{3b(prewitt_best).png}
+ \end{center}
+ 
+ - Canny : threshold = 0.15
+ 
+ \begin{center}
+ \includegraphics[width=0.6\textwidth]{3b(canny).png}
+ \end{center} 
+ 
+ \newpage
+ - Laplaciano : threshold = 0.01
+
+ \begin{center}
+ \includegraphics[width=0.6\textwidth]{3b(laplace).png}
+ \end{center}
   
+ \begin{enumerate} 
+  \item \textit{¿Se mejoran los contornos si la imagen se suaviza antes?}
   
-  \item ¿Cuáles son las limitaciones que ves en la extracción de los contornos en las diferentes imágenes?
+  A la otra imagen imagen le pasamos un filtro de la media y vimos que los contornos mejoraron, ya que suaviza las rugosidades de las texturas de los elementos de la imagen (las plantas amarillas que parecen patas de gallo, tienen las rugosidades suavizadas después del filtro que ayuda con encontrar el contorno mejor)
+  
+  \item \textit{¿Cuáles son las limitaciones que ves en la extracción de los contornos en las diferentes imágenes?}
+  
+  Habiendo hecho diferentes imágenes, vimos limitaciones como que si hay detalles relativamente pequeños (la R de copyright del de Starbucks, por ejemplo) los filtros no los detectan muy bien y si la imagen tiene muchísimos detalles es complicado ajustar los parámetros para que esos detalles se vean bien y no salga un contorno con demasiada información.
+  
  \end{enumerate}
  
   
@@ -196,11 +268,13 @@ visualizarla a diferentes escalas para  obtener el efecto  visual de las imágen
 (Figura 2).}  
  
  \begin{center}
- \includegraphics[width=0.8\textwidth]{4a.png}
+ \includegraphics[width=\textwidth]{4a.png}
  \end{center}
 
  \item \textit{Visualizar la imagen híbrida sobre la misma figura/región para poder evaluar a partir 
 de qué tamaño se pasa a percibir a  Marylin Monroe.}
+
+  Ya está en el apartado (a)
 
  \end{enumerate}
 
@@ -213,7 +287,7 @@ de qué tamaño se pasa a percibir a  Marylin Monroe.}
  
  Usamos la máscara de gaussiano con sigma = 10. 
  
- Mostramos un frame del vídeo:
+ Mostramos un frame del vídeo. El resto del vídeo después de ejecutar nuestro script de MatLab estará en el archivo "output.mp4"
 
  \begin{center}
  \includegraphics[width=0.6\textwidth]{5.png}
