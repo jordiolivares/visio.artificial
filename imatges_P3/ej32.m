@@ -1,4 +1,4 @@
-function [ output_args ] = ej32( input_args )
+function [ ] = ej32( )
 %EJ32 Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -8,36 +8,45 @@ function [ output_args ] = ej32( input_args )
     
     figure
     subplot(2,3,2)
+    plot(cloud1(:,1), cloud1(:,2), '.', cloud2(:,1), cloud2(:,2), '.', cloud3(:,1), cloud3(:,2), '.')
     title('Original')
-    plot(cloud1(:,1), cloud1(:,2), '.', cloud2(:,1), cloud2(:,2), '.', cloud3(:,1), cloud3(:,2), '.')
-       
-    [idx , C] = kmeans([cloud1 ; cloud2 ; cloud3], 2);
-
+    
     allPoints = [cloud1; cloud2; cloud3];
-    m_allPoints = num2cell(allPoints);
     
-    cluster1 = m_allPoints(find(idx==1));
+    [idx , C] = kmeans([cloud1 ; cloud2 ; cloud3], 2);    
     
-    cluster2 = m_allPoints(find(idx==2));
-    subplot(2,3,3)
+    subplot(2,3,4)
+    hold on
+    for i=1:2
+        cluster = allPoints(idx==i,:);
+        plot(cluster(:,1), cluster(:,2), '.')
+        plot(C(i,1), C(i,2), 'o')
+    end
     title('k=2')
-    plot(cluster1(:,1), cluster1(:,2), '.', cluster2(:,1), cluster2(:,2), '.')
+    %legend('show')
     
-    %{
-    [idx , C] = kmeans([cloud1 ; cloud2 ; cloud3], 2)
-    cluster1 = [cloud1(idx==1) ; cloud2(idx==1) ; cloud3(idx==1)];
-    cluster2 = [cloud1(idx==2) ; cloud2(idx==2) ; cloud3(idx==2)];   
-    cluster3 = [cloud1(idx==3) ; cloud2(idx==3) ; cloud3(idx==3)];
+    [idx , C] = kmeans([cloud1 ; cloud2 ; cloud3], 3);    
     
-    [idx , C] = kmeans([cloud1 ; cloud2 ; cloud3], 2)
-    cluster1 = [cloud1(idx==1) ; cloud2(idx==1) ; cloud3(idx==1)];
-    cluster2 = [cloud1(idx==2) ; cloud2(idx==2) ; cloud3(idx==2)];   
-    cluster3 = [cloud1(idx==3) ; cloud2(idx==3) ; cloud3(idx==3)];
+    subplot(2,3,5)
+    hold on
+    for i=1:3
+        cluster = allPoints(idx==i,:);
+        plot(cluster(:,1), cluster(:,2), '.')
+        plot(C(i,1), C(i,2), 'o')
+    end
+    title('k=3')
+    %legend('show')
     
-    plot(cloud1(:,1), cloud1(:,2), '.', cloud2(:,1), cloud2(:,2), '.', cloud3(:,1), cloud3(:,2), '.')
+    [idx , C] = kmeans([cloud1 ; cloud2 ; cloud3], 4);    
     
-    cluster1 = 
-    %}
-
+    subplot(2,3,6)
+    hold on
+    for i=1:4
+        cluster = allPoints(idx==i,:);
+        plot(cluster(:,1), cluster(:,2), '.')
+        plot(C(i,1), C(i,2), 'o')
+    end
+    title('k=4')
+    %legend('show')
 end
 
