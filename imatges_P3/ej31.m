@@ -1,20 +1,22 @@
 function [ output_args ] = ej31( input_args )
 %EJ31 Summary of this function goes here
 %   Detailed explanation goes here
-    output_args = extractBackground(input_args);
+    output_args = extractBackground('Barcelona.mp4');
 end
 
 function [backgroundFrames] = extractBackground(filename)
     keyFrames = segmentVideo(filename, 250000);
     video = VideoReader(filename);
-    backgroundFrames = zeros(video.Height, video.Width, 3, size(keyFrames, 1));
-    for i = 1:size(keyFrames)
-        if i == size(keyFrames)
-            numFrames = video.NumberOfFrames - keyFrames(i);
+    videoFrames = video.NumberOfFrames;
+    video = VideoReader(filename);
+    backgroundFrames = zeros(video.Height, video.Width, 3, size(keyFrames, 1), 'uint8');
+    for i = 1:size(keyFrames, 1)
+        if i == size(keyFrames, 1)
+            numFrames = videoFrames - keyFrames(i);
         else
             numFrames = keyFrames(i+1) - keyFrames(i);
         end
-        tmp = zeros(video.Height, video.Width, 3, numFrames);
+        tmp = zeros(video.Height, video.Width, 3, numFrames, 'uint8');
         for j = 1:numFrames
             tmp(:,:,:, j) = readFrame(video);
         end
