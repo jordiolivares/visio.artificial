@@ -10,17 +10,17 @@ function [ ] = ej33( )
     
     [rows, columns] = size(loro);
     
-    n=4;
+    n=5;
     [idx, C] = kmeans(array, n);
     
     figure
-    subplot(1,4,1)
+    subplot(1,2,1)
     
     for i=1:n
         array(idx==i, 1) = mean(array(idx==i, 1));
     end
     imshow(reshape(array(:,1), [rows, columns]));
-    title(strcat('k=', n))
+    title('k=10')
     
     %%%%%%%%%%%%% PART 2 %%%%%%%%%%%%%
     array2 = zeros(rows*columns, 3);
@@ -34,20 +34,23 @@ function [ ] = ej33( )
       end
     end
     array2(:, 3) = re_loro;
-    array2(:, 4) = re_loro;
     
     [idx, C] = kmeans(array2, n);
     
-    subplot(1,4,2)
+    subplot(1,2,2)
     for i=1:n
-        array2(idx==i, 3) = mean(array2(idx==i, 3));
+        array2(idx==i, 3) = C(i,3);
     end
     imshow(reshape(array2(:, 3), [rows, columns]));
-    title(strcat('k=', n))
+    title('k=10')
 
     %%%%%%%%%%%%% PART 3 %%%%%%%%%%%%%
     
-    subplot(1,4,3)
+    figure
+    subplot(2,2,1)
+    imshow(loro_rgb)
+
+    subplot(2,2,2)
     plotPixelDistribution(loro_rgb)
     
     rgb_matrix(:,1) = reshape(double(loro_rgb(:,:,1)), [], 1);
@@ -56,7 +59,6 @@ function [ ] = ej33( )
     
     [idx, C] = kmeans(rgb_matrix, 16);
     
-    subplot(1,4,4)
     for i=1:16
         rgb_matrix(idx==i, 1) = C(i, 1);
         rgb_matrix(idx==i, 2) = C(i, 2);
@@ -65,10 +67,14 @@ function [ ] = ej33( )
     title('k=16')
     
     loro_tmp = loro_rgb;
-    loro_tmp(:,:,1) = rgb_matrix(:,1);
-    loro_tmp(:,:,2) = rgb_matrix(:,2);
-    loro_tmp(:,:,3) = rgb_matrix(:,3);
+    loro_tmp(:,:,1) = reshape(rgb_matrix(:,1), [rows, columns]);
+    loro_tmp(:,:,2) = reshape(rgb_matrix(:,2), [rows, columns]);
+    loro_tmp(:,:,3) = reshape(rgb_matrix(:,3), [rows, columns]);
     
+    subplot(2,2,3)
+    imshow(loro_tmp)
+
+    subplot(2,2,4)
     plotPixelDistribution(loro_tmp)
 end
 
