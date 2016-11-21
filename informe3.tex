@@ -3,7 +3,7 @@
 \usepackage[utf8]{inputenc}
 
 \usepackage{graphicx}
-\graphicspath{ {./images_P2/imatges_informe/} }
+\graphicspath{ {./imatges_P3/imatges_informe/} }
 
 
 \title{Informe pràctica 3\\Visió Artificial}
@@ -100,15 +100,33 @@ imagen con 16 colores junto con su distribución de colores (Figura 3).}
  \begin{enumerate}
  \item \textit{¿A  qué  corresponden  las  variables f y  d que  devuelve  el método  vl\_sift? ¿Qué tamaño tienen? ¿A qué corresponden sus valores?}  
  
+ $f$ contiene los frames resultantes del algoritmo SIFT, y $d$ contiene los descriptores de éstos. La primera tiene un tamaño de $4$ por el número de frames, y la segunda $128$ por el número de frames, en éste caso tenemos el número vale $282$.
+ 
+ Los valores de $f$ en cada columna corresponden a $2$ elementos que indican el centro del frame, la escala de éste, y la orientación en radianes. Para $d$ tenemos que el vector de descripción són todos los histogramas de gradientes de los sub-patches juntos($8 \times 4 \times 4 = 128$)
+ 
  \item \textit{En  este  apartado  se muestran  los  puntos  característicos  detectados  con SIFT  en  una  misma  imagen  con  rotación.  Compara  los  resultados 
 obtenidos antes y después de hacer la rotación y comenta lo que ves. ¿Hay 
 invariancia a rotación? ¿Qué significa la línea que aparece en el interior de 
 los círculos?}
 
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{ej34b.png}
+\end{center}
+
+Como podemos ver en la imagen, SIFT es invariante a la rotación. Vemos claramente que detecta los mismos puntos aunque girados. La línea que hay en medio indican la orientación del frame. Nos es útil para comparar los frames, ya que podemos normalizar con ellos la orientación de los frames.
+
  \item \textit{En  este  caso,  se  comparan  los  resultados  con  una  misma  imagen  a 
 distintas  escalas.  Compara  los  resultados  obtenidos  antes  y  después  de 
 hacer el reescalado y comenta lo que ves. ¿Hay invariancia a escala? ¿Qué 
 significa el tamaño de los círculos que se muestran?}
+
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{ej34c.png}
+\end{center}
+
+En éste caso vemos cómo el hacer un reescalado afecta a la hora de detectar los puntos con SIFT. En concreto, tenemos que nos impide calcular correctamente dónde hay esquinas en el paso del detector de Harris. El tamaño de los círculos indica el tamaño del frame, cuanto más grande más grande será el frame.
+
+De hecho podemos ver que a medida que reescalamos la imagen, nos quedamos sólo con los frames más grandes ya que son los que sobreviven al reescalado.
 
  \item \textit{En este apartado se genera una imagen sintética y se calcula el descriptor 
 en dos puntos distintos de la imagen.  Verás  que  se generan dos  figuras 
@@ -116,6 +134,18 @@ con el mismo  formato, pero con una pequeña diferencia en el cálculo del
 descriptor.  Fíjate  en los  descriptores  de la  fila inferior  del subplot.  ¿Qué 
 diferencia  encuentras  entre  los  mostrados  en  la  primera  figura  y  la 
 segunda?}
+
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{ej34d1.png}
+\end{center}
+
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{ej34d2.png}
+\end{center}
+
+Vamos primero a comentar que la gráfica del descriptor se calcula teniendo en cuenta el frame. Además, la imagen sintética se genera con unos frames de SIFT proporcionados ya en el código. Éstos tienen ya la orientación indicada.
+
+Ahora, la primera figura usa la orientación proporcionada en el frame, pero la segunda la calcula. De esta manera, a la hora de hacer la gráfica, como normalizamos los descriptores en base al frame y su orientación, los dos frames contienen la misma imagen con la orientación normalizada. Por tanto, tienen la misma gráfica de los descriptores.
 
  \end{enumerate}
 

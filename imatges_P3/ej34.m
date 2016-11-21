@@ -8,7 +8,7 @@ close all;
 
 %% a) Get SIFT descriptors from image
 % Load sample image and convert to single grayscale
-img = imread('starbuck.jpg');
+img = imread('starbucks.jpg');
 img = single(rgb2gray(img));
 
 % Run SIFT over the image
