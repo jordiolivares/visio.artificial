@@ -21,13 +21,19 @@
 
  \item \textit{Encontrar  donde  se  acaba  una  escena  y  comienza  otra  (estos  frames  se denominan  shots del  vídeo).  ¿Qué  medida  de  las  imágenes  se  puede utilizar para distinguir las escenas?}
  
- A simple vista, no se pierden detalles, pero en el histograma se ve que hay diferencias sutiles entre las dos imágenes (original y reescalada).
+ Usamos como medida la diferencia en valor absoluto de los histogramas de imagen. Es decir, calculamos el histograma de dos imágenes, los restamos, y sumamos el valor absoluto de todos los valores de diferencia. De esta forma conseguimos una medida que no sufrirá mucha variación si los objetos se mueven, pero variará si cambiamos el plano repentinamente.
 
  \item \textit{Aplicar  un  algoritmo  de  background  substraction  (consultar  el  material 
 de teoría)}
 
+El algoritmo que usamos consiste en una vez hallada la escena calculamos la mediana de cada píxel a lo largo de ésta. Así conseguimos el fondo exclusivamente.
+
  \item \textit{Visualizar, para  cada  segmento  delimitado  por  dos  shots  del  vídeo,  la  imagen 
 estática extraída y las imágenes a partir de las cuales se ha obtenido}
+
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{ej31a.png}
+\end{center}
 
  \item \textit{Comenta  en  detalle  la  implementación.  ¿Qué  sucede  si  los  shots  no  están 
 correctamente  extraídos?    ¿Qué  sucede  si  encuentras  demasiados  shots  en  el 
@@ -35,8 +41,19 @@ vídeo?  Comenta qué representan  las  imágenes  estáticas  obtenidas.  ¿En 
 situaciones  el  algoritmo  funciona  y  en  cuáles  no? ¿Qué  sucede  si  restas  de  la 
 imagen original la imagen del fondo? Visualízalo.}
 
+Para resolver el problema de encontrar demasiados shots lo que hemos hecho ha sido plotear la gráfica de diferencias entre frames y escogido un valor que veamos que tiene picos notables. En el caso de que no se extraigan bien los shots, nos encontraríamos que a la hora de extraer el fondo tendríamos una mezcla entre ambos backgrounds. Si por contra hay demasiados, lo que podemos hacer es augmentar el threshold de diferéncias, de ésta forma nos costará más detectar un cambio de escena y por tanto reduciríamos el número de shots.
+
+Las imágenes estáticas obtenidas són pues el background del shot. En éste caso, vemos fácilmente que los planos en que la cámara es estática obtendremos el fondo con mucha nitidez. Pero en el caso de que ésta no sea estática, todo el fondo saldrá borroso debido a que realizamos la mediana y todo el plano se está moviendo mientras asumimos que el fondo será estático.
+
+En el caso de restar a una imagen el background hallado, nos encontraríamos con las partes en movimiento de la imagen. Cogiendo las mismas imágenes de antes obtenemos pues la siguiente:
+
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{ej31b.png}
+\end{center}
+
  \item \textit{Ves  otras aplicaciones que se pueden sacar de este algoritmo?}
 
+Hemos visto el más fácil de ver, el detectar cosas en movimiento. Otro ejemplo de uso que se le podría dar 
  \end{enumerate}
 
 \newpage
@@ -157,8 +174,14 @@ Ahora, la primera figura usa la orientación proporcionada en el frame, pero la 
  \item \textit{Utiliza  el  método  showMatches usando  como  modelo  la  imagen 
  starbucks.jpg y como (nueva) escena la imagen starbucks6.jpg.}
 
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{ej35a.png}
+\end{center}
+
  \item \textit{Repite el experimento  usando otras imágenes  como modelo  y/o escena. 
 Para cada imagen modelo, enseña el  resto de imágenes de Starbucks en orden de su semejanza con el modelo.}
+
+
 
  \item \textit{¿Qué pasa si se le pasa una imagen que no contiene el logo de Starbucks? 
 ¿Qué  método  propondrías  (sin  implementarlo)  para  definir la 
