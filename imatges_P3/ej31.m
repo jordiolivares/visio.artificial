@@ -1,10 +1,28 @@
-function [ output_args ] = ej31( input_args )
+function [] = ej31()
 %EJ31 Summary of this function goes here
 %   Detailed explanation goes here
-    output_args = extractBackground('Barcelona.mp4');
+    frames = extractBackground('Barcelona.mp4');
+    video = VideoReader('Barcelona.mp4');
+    sampleFrame = read(video, 1757);
+    background = frames(:,:,:,12);
+    
+    figure
+    subplot(1,2,1)
+    imshow(background);
+    title('Background');
+    subplot(1,2,2)
+    imshow(sampleFrame);
+    title('Image');
+    
+    figure
+    subplot(1,1,1)
+    imshow(sampleFrame - background);
+    title('Moving parts')
+    
 end
 
 function [backgroundFrames] = extractBackground(filename)
+% Extracts the background of a video in each scene using the median
     keyFrames = segmentVideo(filename, 250000);
     video = VideoReader(filename);
     videoFrames = video.NumberOfFrames;
@@ -20,11 +38,13 @@ function [backgroundFrames] = extractBackground(filename)
         for j = 1:numFrames
             tmp(:,:,:, j) = readFrame(video);
         end
+        % Median of all frames at that pixel coordinate
         backgroundFrames(:,:,:,i) = median(tmp, 4);
     end
 end
 
 function [keyFrames] = segmentVideo(filename, threshold)
+% Segments the video using 'threshold' as a way to detect change of scene
     video = VideoReader(filename);
     keyFrames = 1;
     previous_frame = readFrame(video);
@@ -39,7 +59,10 @@ function [keyFrames] = segmentVideo(filename, threshold)
         frame_count = frame_count + 1;
     end
 end
+
 function [difference] = frameDiff(frame1, frame2)
+% Calculates the difference between images using the image histogram of
+% each RGB channel
     [tmp1, ~] = imhist(frame1(:,:,1));
     [tmp2, ~] = imhist(frame2(:,:,1));
     diffR = sum(abs(tmp1 - tmp2));
