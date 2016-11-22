@@ -10,7 +10,7 @@ function [ ] = ej33( )
     
     [rows, columns] = size(loro);
     
-    n=20;
+    n=50;
     [idx, C] = kmeans(array, n);
     
     figure
@@ -20,7 +20,7 @@ function [ ] = ej33( )
         array(idx==i, 1) = mean(array(idx==i, 1));
     end
     imshow(reshape(uint8(array(:,1)), [rows, columns]));
-    title('k=10')
+    title('k=50')
     
     %%%%%%%%%%%%% PART 2 %%%%%%%%%%%%%
     array2 = zeros(rows*columns, 3);
@@ -42,7 +42,7 @@ function [ ] = ej33( )
         array2(idx==i, 3) = C(i,3);
     end
     imshow(reshape(uint8(array2(:, 3)), [rows, columns]));
-    title('k=10')
+    title('k=50')
 
     %%%%%%%%%%%%% PART 3 %%%%%%%%%%%%%
     

@@ -22,7 +22,6 @@ function [ ] = ej32( )
     subplot(2,3,4)
     plotClusters(2, idx, C, allPoints)
     title('k=2')
-    legend('show')
     
     %%% k=3 %%%
 
@@ -31,7 +30,6 @@ function [ ] = ej32( )
     subplot(2,3,5)
     plotClusters(3, idx, C, allPoints)
     title('k=3')
-    legend('show')
     
     %%% k=4 %%%
 
@@ -40,7 +38,6 @@ function [ ] = ej32( )
     subplot(2,3,6)
     plotClusters(4, idx, C, allPoints)
     title('k=4')
-    legend('show')
 end
 
 function [] = plotClusters(k, idx, C, allPoints)

@@ -57,10 +57,18 @@ el  resultado  (incluyendo  los  centros)  de  las  agrupaciones  con  2,  3  y 
 centros  respectivamente  en  la  segunda  fila  del  subplot,  utilizando 
 diferentes colores (Figura 2).}
 
+	La visualización del resultado de ambos apartados:
+	
+	\begin{center}
+		\includegraphics[width=\textwidth]{ej32-kmeans.png}
+	\end{center}
+
  \item \textit{Comenta  los  resultados  que  has  encontrado,  valorando  el  número  de 
 agrupaciones que has encontrado en cada caso y la similitud con los datos 
 iniciales}
  
+ Las agrupaciones reales se encontraron con $k=3$, ya que generamos los datos de manera que haya 3 grupos y se encontraron de forma satisfactoria. En el resto de casos, en k=2 hay 2 agrupaciones bastante claras y en $k=4$ según nuestra interpretación el clúster cuarto es bastante forzado, pero eso es consecuencia natural de kmeans, ya que este algoritmo encuentra tantas agrupaciones como $k$ le entremos.
+
  \end{enumerate}
 
 \newpage
@@ -75,21 +83,28 @@ encontrar la mejor segmentación.}
  \item \textit{Visualiza  la  imagen  segmentada  utilizando  el  nivel  de  gris  promedio 
 encontrado con el método de segmentación. ¿A qué corresponde?}
 
+ Como es un kmeans 2-dimensional, corresponde al centroide de cada clúster encontrado. A partir de aquí usamos el centroide para crear la segmentación de la imagen.
+
  \item \textit{Añade como características las coordenadas de los píxeles y comprueba si 
 mejora el resultado de la segmentación}
-
-  \item \textit{Visualiza el resultado anterior en una  figura junto con la distribución de 
-sus  colores  (utiliza  la  función plotPixelDistribution facilitada  con  el 
-enunciado).}
   
+	Resultado de comparativa para ver las diferencias entre hacer kmeans con posición y sin ellos (repitiendo el color 2 veces en este caso):
+	
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{ej33-loroGray.png}
+	\end{center}
+	
   \item \textit{A partir de la imagen de entrada, crea un matriz que contenga en cada fila la tripleta RGB de un píxel de la imagen. Tendrá tantas filas como píxeles 
 haya en la imagen.}
 
  \item \textit{Utilizar el método kmeans para reducir el número de colores de la imagen 
 a 16 colores diferentes.}
  
- \item \textit{Visualizar  en  una  misma  figura  las  imágenes  del  primer  apartado,  y  la 
-imagen con 16 colores junto con su distribución de colores (Figura 3).} 
+ \item \textit{Visualizar  en  una  misma  figura  las  imágenes  del  primer  apartado,  y  la imagen con 16 colores junto con su distribución de colores (Figura 3).}
+
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{ej33-loroRGB.png}
+	\end{center}
  
  \end{enumerate}
 
@@ -124,7 +139,7 @@ significa el tamaño de los círculos que se muestran?}
 	\includegraphics[width=0.8\textwidth]{ej34c.png}
 \end{center}
 
-En éste caso vemos cómo el hacer un reescalado afecta a la hora de detectar los puntos con SIFT. En concreto, tenemos que nos impide calcular correctamente dónde hay esquinas en el paso del detector de Harris. El tamaño de los círculos indica el tamaño del frame, cuanto más grande más grande será el frame.
+En este caso vemos cómo el hacer un reescalado afecta a la hora de detectar los puntos con SIFT. En concreto, tenemos que nos impide calcular correctamente dónde hay esquinas en el paso del detector de Harris. El tamaño de los círculos indica el tamaño del frame, cuanto más grande más grande será el frame.
 
 De hecho podemos ver que a medida que reescalamos la imagen, nos quedamos sólo con los frames más grandes ya que son los que sobreviven al reescalado.
 
