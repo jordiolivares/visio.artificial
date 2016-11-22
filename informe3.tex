@@ -88,11 +88,13 @@ encontrado con el método de segmentación. ¿A qué corresponde?}
  \item \textit{Añade como características las coordenadas de los píxeles y comprueba si 
 mejora el resultado de la segmentación}
   
-	Resultado de comparativa para ver las diferencias entre hacer kmeans con posición y sin ellos (repitiendo el color 2 veces en este caso):
+	Resultado de comparativa para ver las diferencias entre hacer kmeans con posición y sin ellos (repitiendo el color 2 veces en este caso). El k-means es con $k=50$:
 	
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{ej33-loroGray.png}
 	\end{center}
+	
+	Nos salen una rayas verticales dentro del k-means si añadimos la posición cosa que no sabemos exactamente porque nos pasa.
 	
   \item \textit{A partir de la imagen de entrada, crea un matriz que contenga en cada fila la tripleta RGB de un píxel de la imagen. Tendrá tantas filas como píxeles 
 haya en la imagen.}
