@@ -198,14 +198,33 @@ Ahora, la primera figura usa la orientación proporcionada en el frame, pero la 
  \item \textit{Repite el experimento  usando otras imágenes  como modelo  y/o escena. 
 Para cada imagen modelo, enseña el  resto de imágenes de Starbucks en orden de su semejanza con el modelo.}
 
+En el programa tenemos implementado la comparación en orden creciente de semejanza con el modelo (hemos definido la semejanza como la suma de score que produce la función showMatches).
 
+Hemos hecho ésto para todas las imágenes de Starbucks.
 
  \item \textit{¿Qué pasa si se le pasa una imagen que no contiene el logo de Starbucks? 
 ¿Qué  método  propondrías  (sin  implementarlo)  para  definir la 
 probabilidad que la imagen “escena” corresponde a la imagen “modelo”?}
 
+Un algoritmo muy simple iría entorno al número de coincidencias que ha encontrado la función showMatches. En el caso de que fuesen pocas, indicaría que no ha encontrado la imagen ya que no ha visto sus features. En el caso contrario significaría que estamos bastantes seguros de que la imagen está en la escena.
+
  \item \textit {Repite el experimento 4 veces cambiando las escalas y orientaciones del 
 modelo. Comenta tus observaciones.}
+ 
+ Como hemos visto antes, el hecho de rotar no afecta al algoritmo SIFT. Por contra el reescalado del modelo afectará a la capacidad de extracción de información de la imagen. Veamos pues el mismo apartado a) con las imágenes de modelo alteradas.
+ 
+ \begin{center}
+ 	\includegraphics[width=0.8\textwidth]{ej35d1.png}
+ \end{center}
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{ej35d2.png}
+\end{center}
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{ej35d3.png}
+\end{center}
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{ej35d4.png}
+\end{center}
  
  \end{enumerate}
 
