@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage[a4paper]{geometry}
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx}
+\graphicspath{ {./images_P4/imatges_informe/} }
+
+
+\title{Informe pràctica 4\\Visió Artificial}
+\author{Jordi Olivares Provencio\\Christian José Soler}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+ \item \textbf{Extracción de descriptores de textura}
+
+ \begin{enumerate}
+
+ \item \textit{Descargar el código para generar un banco de filtros de la Gaussiana (dicho de otra manera: el banco de  filtros de Leung-Malik (LM)) y visualizarlos en una figura. Nota: Fíjate en los comandos imagesc y colorbar. ¿Qué hacen? ¿A qué corresponden los diferentes filtros? ¿Qué valores tienen?}
+ 
+ \item \textit{  Implementar una  función getFeatures que dada una imagen, construye un descriptor de texturas, donde cada elemento del descriptor es el promedio del 
+resultado de la convolución de la imagen con los filtros. ¿Qué dimensión tiene el descriptor? Nota: Al buscar la textura de la imagen, no nos importa el color. Por lo tanto, tenéis que convertir la imagen en color a escala de grises. Visualiza el  resultado de la convolución con algunos  filtros. Observa qué  filtros tienen  una  mejor  respuesta  sobre  la  imagen  que  has  escogido  y  comenta  el porqué. }
+
+ \item \textit{ Escribir  una  función  getClassFeatures que dado  un  directorio  y  una extensión, lee todas las imágenes del directorio con la extensión dada, calcula sus descriptores de textura (usando getFeatures del 4.1.2) y los guarda en una matriz donde  cada  fila  es  una  imagen  y  cada  columna  una  característica.  Aplicar  esta función para construir tres matrices de descriptores de textura de las 3 clases de imágenes del directorio textureimages facilitado con el enunciado.}
+
+ \item \textit{ Escribir una función visualizeFeatures que visualiza en un plot una lista de una o varias características (por ejemplo: [25, 41]) para las imágenes de los tres directorios con un color diferente para cada directorio (help plot).}
+
+ \item \textit{ Para  cada imagen  de las  tres  clases,  escribir una  función  retrieveKImages que  recupera  y  visualiza  las  k  ($k=9$)  imágenes  más parecidas  según  sus descriptores de textura (ver Fig. 4).}
+
+ \item \textit{Observar cómo mejora el resultado si aparte de los filtros de textura añadimos el color  (r,g,b)  como  tres  características  más  por  cada  imagen.  ¿Qué  dimensión tendrá el espacio de características si añadimos el color?}
+
+ \item \textit{Observa cuáles son las características más discriminativas para cada conjunto de imágenes  primero  sin  utilizar  color  y  luego  utilizando  color.  Comenta  tus observaciones sobre el funcionamiento del algoritmo y posibles mejoras.}
+
+ 
+ \end{enumerate}
+
+\newpage
+
+ \item \textbf{Métodos de agrupación de datos numéricos}
+
+ \begin{enumerate}
+ \item \textit{¿Qué parámetros de entrada recibe el método vl\_lbp? ¿A qué corresponde el valor devuelto y qué dimensión tiene?}
+
+ \item \textit{  Implementar una  función getLBPfeatures que dada una imagen, construye un  descriptor  de  texturas  definido  como  el  histograma  promedio  de  los histogramas  calculados  por  la  función  vl\_lbp para cada  región analizada.  ¿Qué dimensión tiene el descriptor?}
+
+ \item \textit{Utiliza la  función  retrieveKImages implementada en el ejercicio  4.1.5  utilizando como características los descriptores de textura obtenidos con LBP. Compara los resultados  obtenidos en ambos  casos  (filtros Gaussianos  vs.  LBP),  y  explica las ventajas de cada uno.}
+
+ \end{enumerate}
+
+\end{enumerate}
+
+\end{document}
