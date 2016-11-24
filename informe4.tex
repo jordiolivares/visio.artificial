@@ -44,6 +44,8 @@ resultado de la convolución de la imagen con los filtros. ¿Qué dimensión tie
  \begin{enumerate}
  \item \textit{¿Qué parámetros de entrada recibe el método vl\_lbp? ¿A qué corresponde el valor devuelto y qué dimensión tiene?}
 
+	Recibe la imagen y el número de vecinos a mirar para crear el descriptor. El valor devuelto corresponde a los histogramas de cada bloque que ha mirado, tiene dimensión filas de la imagen x columnas de la imagen x bloques que se hicieron (18x22x58 en caso del buildings\_1.jpg)
+
  \item \textit{  Implementar una  función getLBPfeatures que dada una imagen, construye un  descriptor  de  texturas  definido  como  el  histograma  promedio  de  los histogramas  calculados  por  la  función  vl\_lbp para cada  región analizada.  ¿Qué dimensión tiene el descriptor?}
 
  \item \textit{Utiliza la  función  retrieveKImages implementada en el ejercicio  4.1.5  utilizando como características los descriptores de textura obtenidos con LBP. Compara los resultados  obtenidos en ambos  casos  (filtros Gaussianos  vs.  LBP),  y  explica las ventajas de cada uno.}
