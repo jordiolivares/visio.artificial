@@ -3,5 +3,5 @@ function [ texture_feature_vector ] = getLBPFeatures( image )
 %   Detailed explanation goes here
     img = rgb2gray(image);
     histograms = vl_lbp(single(img), 8);
-    texture_feature_vector = mean(histograms, 3);
+    texture_feature_vector = reshape(mean(histograms, 3), 1, []);
 end
