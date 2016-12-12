@@ -16,6 +16,6 @@ function [ featuresVector ] = getFeatures( image )
 end
 
 function [meanConvolution] = calculateFeature(convolution, image)
-    numPixels = numel(image);
-    meanConvolution = sum(sum(imfilter(image, convolution))) / numPixels;
+    convoluted = conv2(double(image), convolution);
+    meanConvolution = mean(convoluted(:));
 end
