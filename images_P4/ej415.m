@@ -1,4 +1,4 @@
-function [ output_args ] = ej41( input_args )
+function [ output_args ] = ej415( input_args )
 %EJ41 Summary of this function goes here
 %   Detailed explanation goes here
     retrieveKImages('texturesimages/forest/forest_14.jpg', 'texturesimages/', @getFeatures)
