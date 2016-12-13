@@ -1,6 +1,5 @@
 function [ output_args ] = ej412( filename )
-%EJ412 Summary of this function goes here
-%   Detailed explanation goes here
+%EJ412 Show the given image after going through all the filters
     F = makeLMfilters();
     image = imread(filename);
     greyImage = double(rgb2gray(image));
