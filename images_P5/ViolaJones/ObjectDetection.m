@@ -85,7 +85,7 @@ end
 HaarCasade=GetHaarCasade(FilenameHaarcasade);
 
 % Get the integral images
-IntergralImages= GetIntergralImages(Picture,Options);
+IntergralImages= GetIntegralImages(Picture,Options);
 
 Objects = HaarCasadeObjectDetection(IntergralImages,HaarCasade,Options);
 
