@@ -2,6 +2,7 @@ clc; close all; clear;
 
 facesDir = 'training_data';
 faces = dir(fullfile(facesDir,'*.bmp')); %What is the variable faces containing?
+% It contains all the faces to be used in the process of training.
 
 face = imread(['./training_data/',faces(1).name,'']);
 R = size(face,1);
@@ -20,11 +21,13 @@ imshow(uint8(round(reshape(PSI, [R C]))));% #to-do: visualize PSI
 A = GAMMA - repmat(PSI, 1, M);% #to-do: calculate the matrix A by subtracting the mean face from each feature vector (help repmat)
 
 % What is the trick of the method here?
+% Instead of calculating the eignevectors of A * A', we instead will
+% calculate the eigenvectors of A' * A
 S_trick = A'*A;
 
 [V, D] = eig(S_trick);% #to-do: calculate the eigenvector and the eigenvalue of the trick matrix (help eig)
 % Which is the dimension of V? Compare to the dimension of the original images. 
-
+% V is 83x83 while 
 U = zeros(size(A));% #to-do: initialize eigenfaces taking into account the dimensionality reduction
 
 % What is the following step here representing?
@@ -37,17 +40,19 @@ for l = 1:M % #to-do: specifiy the limit of the loop
 end
     
 dd = diag(D);% #to-do: extract the eigen values of the matrix D (help diag)
-[dd idx] = sort(dd);% #to-do: sort them in descendent order
+[dd idx] = sort(dd, 'descend');% #to-do: sort them in descendent order
 
 % What are we doing here? Why? Document the code in the following rows.
-dd = dd(dd>0);
-idx2 = idx(dd>0);
-U = U(:,idx2);
+dd = dd(dd>0); % We preserve the eigenvectors that have a positive value
+idx2 = idx(dd>0); % We keep the descending order of the positive values
+U = U(:,idx2); % We only save the vectors from above
 
-numberOfEigenFaces = % #to-do: calculate the number of eigenfaces
+numberOfEigenFaces = length(dd);% #to-do: calculate the number of eigenfaces
 
 % Can we say that the following 4 eigenfaces images are the most
 % representative eigenfaces? If so, why?
+% Yes. The following are the most representative eigenfaces because they
+% are the ones with the most prominent eigenvalues.
 figure();
 subplot(2,2,1), imshow(reshape(U(:,1), R, C), []), title('Eigenface 1');
 subplot(2,2,2), imshow(reshape(U(:,2), R, C), []), title('Eigenface 2');

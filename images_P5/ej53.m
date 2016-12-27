@@ -5,14 +5,33 @@ function [ output_args ] = ej53( input_args )
     % a)
     [X, Y] = getDataBase([20 20]);
     X = uint8(round(reshape(mean(X), [20 20])));
+    imshow(X);
+    rectangle('Position', [3 7 14 4], 'facecolor','k');
+    rectangle('Position', [3 9 14 2], 'facecolor','w');
     % b)
-    showIntegralImage(imread('images/landscape.jpg'));
-    showIntegralImage(imread('images/natural.jpg'));
-    showIntegralImage(imread('images/room.jpg'));
+    figure;
+    subplot(2,3,1);
+    im = imread('images/landscape.jpg');
+    imshow(im);
+    subplot(2,3,4);
+    showIntegralImage(im);
+    subplot(2,3,2);
+    im = imread('images/natural.jpg');
+    imshow(im);
+    subplot(2,3,5);
+    showIntegralImage(im);
+    subplot(2,3,3);
+    im = imread('images/room.jpg');
+    imshow(im);
+    subplot(2,3,6);
+    showIntegralImage(im);
+    pause;
     % c)
     close all;
     image = imread('images/testFaces1.jpg');
     showFaces(image);
+    pause;
+    close all;
     image = imread('images/testFaces2.jpg');
     showFaces(image);
     
